@@ -6,13 +6,13 @@
 #
 Name     : artikulate
 Version  : 18.08.0
-Release  : 1
+Release  : 2
 URL      : https://download.kde.org/stable/applications/18.08.0/src/artikulate-18.08.0.tar.xz
 Source0  : https://download.kde.org/stable/applications/18.08.0/src/artikulate-18.08.0.tar.xz
 Source99 : https://download.kde.org/stable/applications/18.08.0/src/artikulate-18.08.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : BSD-3-Clause GFDL-1.2
+License  : BSD-3-Clause GFDL-1.2 GPL-2.0
 Requires: artikulate-bin
 Requires: artikulate-lib
 Requires: artikulate-data
@@ -100,7 +100,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535164373
+export SOURCE_DATE_EPOCH=1535424679
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -108,9 +108,10 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535164373
+export SOURCE_DATE_EPOCH=1535424679
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/artikulate
+cp COPYING %{buildroot}/usr/share/doc/artikulate/COPYING
 cp COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/doc/artikulate/COPYING-CMAKE-SCRIPTS
 cp COPYING.DOC %{buildroot}/usr/share/doc/artikulate/COPYING.DOC
 pushd clr-build
@@ -183,6 +184,7 @@ popd
 /usr/share/icons/hicolor/scalable/actions/language-artikulate.svg
 /usr/share/icons/hicolor/scalable/apps/artikulate.svg
 /usr/share/metainfo/org.kde.artikulate.appdata.xml
+/usr/share/xdg/artikulate.knsrc
 
 %files dev
 %defattr(-,root,root,-)
@@ -246,6 +248,7 @@ popd
 
 %files license
 %defattr(-,root,root,-)
+/usr/share/doc/artikulate/COPYING
 /usr/share/doc/artikulate/COPYING-CMAKE-SCRIPTS
 /usr/share/doc/artikulate/COPYING.DOC
 
