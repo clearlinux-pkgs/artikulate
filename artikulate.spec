@@ -5,34 +5,35 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : artikulate
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/artikulate-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/artikulate-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/artikulate-18.08.0.tar.xz.sig
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/artikulate-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/artikulate-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/artikulate-18.12.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : BSD-3-Clause GFDL-1.2 GPL-2.0
-Requires: artikulate-bin
-Requires: artikulate-lib
-Requires: artikulate-data
-Requires: artikulate-license
-Requires: artikulate-locales
+License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1 LGPL-3.0
+Requires: artikulate-bin = %{version}-%{release}
+Requires: artikulate-data = %{version}-%{release}
+Requires: artikulate-lib = %{version}-%{release}
+Requires: artikulate-license = %{version}-%{release}
+Requires: artikulate-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
-BuildRequires : karchive-dev
-BuildRequires : kcrash-dev
 
 %description
-Files in this directory are licensed as specified in file COPYING-ARTWORK.
-The following files are originally created by the KDE Oxygen project.
-We omit the file types in this list as the copyright applies to all file types:
+Artikulate
+==========
+Artikulate is a language learning application that helps improving pronunciation skills for
+various languages. This repository maintains the application and language specifications. All course
+files are maintained in a separate repository named "artikulate-data" and hosted on the KDE
+infrastructure.
 
 %package bin
 Summary: bin components for the artikulate package.
 Group: Binaries
-Requires: artikulate-data
-Requires: artikulate-license
+Requires: artikulate-data = %{version}-%{release}
+Requires: artikulate-license = %{version}-%{release}
 
 %description bin
 bin components for the artikulate package.
@@ -49,10 +50,10 @@ data components for the artikulate package.
 %package dev
 Summary: dev components for the artikulate package.
 Group: Development
-Requires: artikulate-lib
-Requires: artikulate-bin
-Requires: artikulate-data
-Provides: artikulate-devel
+Requires: artikulate-lib = %{version}-%{release}
+Requires: artikulate-bin = %{version}-%{release}
+Requires: artikulate-data = %{version}-%{release}
+Provides: artikulate-devel = %{version}-%{release}
 
 %description dev
 dev components for the artikulate package.
@@ -69,8 +70,8 @@ doc components for the artikulate package.
 %package lib
 Summary: lib components for the artikulate package.
 Group: Libraries
-Requires: artikulate-data
-Requires: artikulate-license
+Requires: artikulate-data = %{version}-%{release}
+Requires: artikulate-license = %{version}-%{release}
 
 %description lib
 lib components for the artikulate package.
@@ -93,27 +94,28 @@ locales components for the artikulate package.
 
 
 %prep
-%setup -q -n artikulate-18.08.0
+%setup -q -n artikulate-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535424679
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549858925
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535424679
+export SOURCE_DATE_EPOCH=1549858925
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/artikulate
-cp COPYING %{buildroot}/usr/share/doc/artikulate/COPYING
-cp COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/doc/artikulate/COPYING-CMAKE-SCRIPTS
-cp COPYING.DOC %{buildroot}/usr/share/doc/artikulate/COPYING.DOC
+mkdir -p %{buildroot}/usr/share/package-licenses/artikulate
+cp COPYING %{buildroot}/usr/share/package-licenses/artikulate/COPYING
+cp COPYING-ARTWORK %{buildroot}/usr/share/package-licenses/artikulate/COPYING-ARTWORK
+cp COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/artikulate/COPYING-CMAKE-SCRIPTS
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/artikulate/COPYING.DOC
 pushd clr-build
 %make_install
 popd
@@ -194,8 +196,26 @@ popd
 
 %files doc
 %defattr(0644,root,root,0755)
+/usr/share/doc/HTML/ca/artikulate/editor-apply.png
+/usr/share/doc/HTML/ca/artikulate/editor-cancel.png
+/usr/share/doc/HTML/ca/artikulate/first-steps-1-create-profile.png
+/usr/share/doc/HTML/ca/artikulate/first-steps-3-download-course.png
+/usr/share/doc/HTML/ca/artikulate/first-steps-4-start-training.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-expression.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-language.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-media-playback-start.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-media-playback-stop.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-media-record-active.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-media-record.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-paragraph.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-sentence.png
+/usr/share/doc/HTML/ca/artikulate/hi32-action-artikulate-word.png
 /usr/share/doc/HTML/ca/artikulate/index.cache.bz2
 /usr/share/doc/HTML/ca/artikulate/index.docbook
+/usr/share/doc/HTML/ca/artikulate/screen-training-progressbar.png
+/usr/share/doc/HTML/ca/artikulate/training-finish.png
+/usr/share/doc/HTML/ca/artikulate/training-ok.png
+/usr/share/doc/HTML/ca/artikulate/training-retry.png
 /usr/share/doc/HTML/de/artikulate/index.cache.bz2
 /usr/share/doc/HTML/de/artikulate/index.docbook
 /usr/share/doc/HTML/en/artikulate/editor-apply.png
@@ -247,10 +267,11 @@ popd
 /usr/lib64/qt5/plugins/artikulate/libsound/qtmultimediabackend.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/artikulate/COPYING
-/usr/share/doc/artikulate/COPYING-CMAKE-SCRIPTS
-/usr/share/doc/artikulate/COPYING.DOC
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/artikulate/COPYING
+/usr/share/package-licenses/artikulate/COPYING-ARTWORK
+/usr/share/package-licenses/artikulate/COPYING-CMAKE-SCRIPTS
+/usr/share/package-licenses/artikulate/COPYING.DOC
 
 %files locales -f artikulate.lang
 %defattr(-,root,root,-)
