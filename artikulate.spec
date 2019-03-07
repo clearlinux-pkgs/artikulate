@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : artikulate
-Version  : 18.12.2
-Release  : 3
-URL      : https://download.kde.org/stable/applications/18.12.2/src/artikulate-18.12.2.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.12.2/src/artikulate-18.12.2.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.12.2/src/artikulate-18.12.2.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 18.12.3
+Release  : 4
+URL      : https://download.kde.org/stable/applications/18.12.3/src/artikulate-18.12.3.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.3/src/artikulate-18.12.3.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.3/src/artikulate-18.12.3.tar.xz.sig
+Summary  : Improve your pronunciation by listening to native speakers
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1 LGPL-3.0
 Requires: artikulate-bin = %{version}-%{release}
@@ -54,6 +54,7 @@ Requires: artikulate-lib = %{version}-%{release}
 Requires: artikulate-bin = %{version}-%{release}
 Requires: artikulate-data = %{version}-%{release}
 Provides: artikulate-devel = %{version}-%{release}
+Requires: artikulate = %{version}-%{release}
 
 %description dev
 dev components for the artikulate package.
@@ -94,22 +95,23 @@ locales components for the artikulate package.
 
 
 %prep
-%setup -q -n artikulate-18.12.2
+%setup -q -n artikulate-18.12.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549858925
+export SOURCE_DATE_EPOCH=1551981613
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549858925
+export SOURCE_DATE_EPOCH=1551981613
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/artikulate
 cp COPYING %{buildroot}/usr/share/package-licenses/artikulate/COPYING
