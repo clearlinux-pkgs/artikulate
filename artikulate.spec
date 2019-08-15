@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : artikulate
-Version  : 19.04.3
-Release  : 10
-URL      : https://download.kde.org/stable/applications/19.04.3/src/artikulate-19.04.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.3/src/artikulate-19.04.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.3/src/artikulate-19.04.3.tar.xz.sig
+Version  : 19.08.0
+Release  : 11
+URL      : https://download.kde.org/stable/applications/19.08.0/src/artikulate-19.08.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.0/src/artikulate-19.08.0.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.0/src/artikulate-19.08.0.tar.xz.sig
 Summary  : Improve your pronunciation by listening to native speakers
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1 LGPL-3.0
@@ -20,6 +20,7 @@ Requires: artikulate-license = %{version}-%{release}
 Requires: artikulate-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : kirigami2-dev
 
 %description
 Artikulate
@@ -45,20 +46,6 @@ Group: Data
 
 %description data
 data components for the artikulate package.
-
-
-%package dev
-Summary: dev components for the artikulate package.
-Group: Development
-Requires: artikulate-lib = %{version}-%{release}
-Requires: artikulate-bin = %{version}-%{release}
-Requires: artikulate-data = %{version}-%{release}
-Provides: artikulate-devel = %{version}-%{release}
-Requires: artikulate = %{version}-%{release}
-Requires: artikulate = %{version}-%{release}
-
-%description dev
-dev components for the artikulate package.
 
 
 %package doc
@@ -96,16 +83,17 @@ locales components for the artikulate package.
 
 
 %prep
-%setup -q -n artikulate-19.04.3
+%setup -q -n artikulate-19.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562851734
+export SOURCE_DATE_EPOCH=1565888424
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -119,7 +107,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1562851734
+export SOURCE_DATE_EPOCH=1565888424
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/artikulate
 cp COPYING %{buildroot}/usr/share/package-licenses/artikulate/COPYING
@@ -145,22 +133,6 @@ popd
 /usr/share/artikulate/images/course-gray.png
 /usr/share/artikulate/images/course.png
 /usr/share/artikulate/images/new-course.png
-/usr/share/artikulate/languages/ba.xml
-/usr/share/artikulate/languages/ca.xml
-/usr/share/artikulate/languages/de.xml
-/usr/share/artikulate/languages/du.xml
-/usr/share/artikulate/languages/en_BE.xml
-/usr/share/artikulate/languages/en_US.xml
-/usr/share/artikulate/languages/fr.xml
-/usr/share/artikulate/languages/gr.xml
-/usr/share/artikulate/languages/hi.xml
-/usr/share/artikulate/languages/it.xml
-/usr/share/artikulate/languages/mr.xml
-/usr/share/artikulate/languages/pl.xml
-/usr/share/artikulate/languages/sp.xml
-/usr/share/artikulate/schemes/course.xsd
-/usr/share/artikulate/schemes/language.xsd
-/usr/share/artikulate/schemes/skeleton.xsd
 /usr/share/artikulate/sounds/testsound.ogg
 /usr/share/config.kcfg/artikulate.kcfg
 /usr/share/icons/hicolor/16x16/actions/artikulate-course.png
@@ -197,12 +169,6 @@ popd
 /usr/share/icons/hicolor/scalable/apps/artikulate.svg
 /usr/share/metainfo/org.kde.artikulate.appdata.xml
 /usr/share/xdg/artikulate.knsrc
-
-%files dev
-%defattr(-,root,root,-)
-/usr/lib64/libartikulatecore.so
-/usr/lib64/libartikulatelearnerprofile.so
-/usr/lib64/libartikulatesound.so
 
 %files doc
 %defattr(0644,root,root,0755)
