@@ -1,5 +1,5 @@
 PKG_NAME := artikulate
-URL = https://download.kde.org/stable/applications/19.08.1/src/artikulate-19.08.1.tar.xz
+URL = https://download.kde.org/stable/applications/19.08.2/src/artikulate-19.08.2.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
