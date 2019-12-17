@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : artikulate
-Version  : 19.08.3
-Release  : 14
-URL      : https://download.kde.org/stable/applications/19.08.3/src/artikulate-19.08.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.08.3/src/artikulate-19.08.3.tar.xz
-Source1 : https://download.kde.org/stable/applications/19.08.3/src/artikulate-19.08.3.tar.xz.sig
+Version  : 19.12.0
+Release  : 15
+URL      : https://download.kde.org/stable/release-service/19.12.0/src/artikulate-19.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/19.12.0/src/artikulate-19.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/19.12.0/src/artikulate-19.12.0.tar.xz.sig
 Summary  : Improve your pronunciation by listening to native speakers
 Group    : Development/Tools
 License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1 LGPL-3.0
@@ -83,14 +83,15 @@ locales components for the artikulate package.
 
 
 %prep
-%setup -q -n artikulate-19.08.3
+%setup -q -n artikulate-19.12.0
+cd %{_builddir}/artikulate-19.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573155277
+export SOURCE_DATE_EPOCH=1576541011
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -107,13 +108,13 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1573155277
+export SOURCE_DATE_EPOCH=1576541011
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/artikulate
-cp %{_builddir}/artikulate-19.08.3/COPYING %{buildroot}/usr/share/package-licenses/artikulate/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/artikulate-19.08.3/COPYING-ARTWORK %{buildroot}/usr/share/package-licenses/artikulate/7c0bb24324bf418d60ef11f29dfa60b77f6982a7
-cp %{_builddir}/artikulate-19.08.3/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/artikulate/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/artikulate-19.08.3/COPYING.DOC %{buildroot}/usr/share/package-licenses/artikulate/1bd373e4851a93027ba70064bd7dbdc6827147e1
+cp %{_builddir}/artikulate-19.12.0/COPYING %{buildroot}/usr/share/package-licenses/artikulate/133efad5329acf364135c569ac01ec084c3d4647
+cp %{_builddir}/artikulate-19.12.0/COPYING-ARTWORK %{buildroot}/usr/share/package-licenses/artikulate/7c0bb24324bf418d60ef11f29dfa60b77f6982a7
+cp %{_builddir}/artikulate-19.12.0/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/artikulate/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/artikulate-19.12.0/COPYING.DOC %{buildroot}/usr/share/package-licenses/artikulate/1bd373e4851a93027ba70064bd7dbdc6827147e1
 pushd clr-build
 %make_install
 popd
