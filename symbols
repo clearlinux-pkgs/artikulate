@@ -136,6 +136,7 @@ libartikulatecore.so.0:_ZN15TrainingSession21updateTrainingActionsEv
 libartikulatecore.so.0:_ZN15TrainingSession4skipEv
 libartikulatecore.so.0:_ZN15TrainingSession6acceptEv
 libartikulatecore.so.0:_ZN15TrainingSession7setUnitEP5IUnit
+libartikulatecore.so.0:_ZN15TrainingSession9closeUnitEv
 libartikulatecore.so.0:_ZN15TrainingSession9completedEv
 libartikulatecore.so.0:_ZN15TrainingSession9setCourseEP7ICourse
 libartikulatecore.so.0:_ZN15TrainingSessionC1EPN14LearnerProfile14ProfileManagerEP7QObject
@@ -259,6 +260,7 @@ libartikulatecore.so.0:_ZN4Unit11qt_metacallEN11QMetaObject4CallEiPPv
 libartikulatecore.so.0:_ZN4Unit11qt_metacastEPKc
 libartikulatecore.so.0:_ZN4Unit12removePhraseESt10shared_ptrI7IPhraseE
 libartikulatecore.so.0:_ZN4Unit12setForeignIdERK7QString
+libartikulatecore.so.0:_ZN4Unit12setI18nTitleERK7QString
 libartikulatecore.so.0:_ZN4Unit18emitPhrasesChangedESt10shared_ptrI13IEditableUnitE
 libartikulatecore.so.0:_ZN4Unit5setIdERK7QString
 libartikulatecore.so.0:_ZN4Unit6createEv
@@ -519,6 +521,7 @@ libartikulatecore.so.0:_ZNK4Unit5titleEv
 libartikulatecore.so.0:_ZNK4Unit6courseEv
 libartikulatecore.so.0:_ZNK4Unit7phrasesEv
 libartikulatecore.so.0:_ZNK4Unit9foreignIdEv
+libartikulatecore.so.0:_ZNK4Unit9i18nTitleEv
 libartikulatecore.so.0:_ZNK5IUnit10metaObjectEv
 libartikulatecore.so.0:_ZNK6Phrase10isExcludedEv
 libartikulatecore.so.0:_ZNK6Phrase10metaObjectEv

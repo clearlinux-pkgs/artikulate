@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : artikulate
-Version  : 19.12.3
-Release  : 18
-URL      : https://download.kde.org/stable/release-service/19.12.3/src/artikulate-19.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/19.12.3/src/artikulate-19.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/19.12.3/src/artikulate-19.12.3.tar.xz.sig
+Version  : 20.04.0
+Release  : 19
+URL      : https://download.kde.org/stable/release-service/20.04.0/src/artikulate-20.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.0/src/artikulate-20.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.0/src/artikulate-20.04.0.tar.xz.sig
 Summary  : Improve your pronunciation by listening to native speakers
 Group    : Development/Tools
-License  : BSD-3-Clause GFDL-1.2 GPL-2.0 LGPL-2.1 LGPL-3.0
+License  : LGPL-2.1
 Requires: artikulate-bin = %{version}-%{release}
 Requires: artikulate-data = %{version}-%{release}
 Requires: artikulate-lib = %{version}-%{release}
@@ -23,6 +23,9 @@ BuildRequires : buildreq-kde
 BuildRequires : kirigami2-dev
 
 %description
+<!--
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
 Artikulate
 ==========
 Artikulate is a language learning application that helps improving pronunciation skills for
@@ -83,15 +86,15 @@ locales components for the artikulate package.
 
 
 %prep
-%setup -q -n artikulate-19.12.3
-cd %{_builddir}/artikulate-19.12.3
+%setup -q -n artikulate-20.04.0
+cd %{_builddir}/artikulate-20.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583430757
+export SOURCE_DATE_EPOCH=1587737359
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -108,13 +111,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1583430757
+export SOURCE_DATE_EPOCH=1587737359
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/artikulate
-cp %{_builddir}/artikulate-19.12.3/COPYING %{buildroot}/usr/share/package-licenses/artikulate/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/artikulate-19.12.3/COPYING-ARTWORK %{buildroot}/usr/share/package-licenses/artikulate/7c0bb24324bf418d60ef11f29dfa60b77f6982a7
-cp %{_builddir}/artikulate-19.12.3/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/artikulate/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/artikulate-19.12.3/COPYING.DOC %{buildroot}/usr/share/package-licenses/artikulate/1bd373e4851a93027ba70064bd7dbdc6827147e1
+cp %{_builddir}/artikulate-20.04.0/libsound/src/qtgstreamerbackend/qtgstreamerbackend.json.license %{buildroot}/usr/share/package-licenses/artikulate/cb036b5481429dea37c9c20c313d7aa1d911b181
+cp %{_builddir}/artikulate-20.04.0/libsound/src/qtmultimediabackend/qtmultimediabackend.json.license %{buildroot}/usr/share/package-licenses/artikulate/cb036b5481429dea37c9c20c313d7aa1d911b181
 pushd clr-build
 %make_install
 popd
@@ -131,42 +132,11 @@ popd
 %files data
 %defattr(-,root,root,-)
 /usr/share/applications/org.kde.artikulate.desktop
-/usr/share/artikulate/images/course-gray.png
-/usr/share/artikulate/images/course.png
-/usr/share/artikulate/images/new-course.png
-/usr/share/artikulate/sounds/testsound.ogg
 /usr/share/config.kcfg/artikulate.kcfg
-/usr/share/icons/hicolor/16x16/actions/artikulate-course.png
-/usr/share/icons/hicolor/16x16/actions/artikulate-expression.png
-/usr/share/icons/hicolor/16x16/actions/artikulate-paragraph.png
-/usr/share/icons/hicolor/16x16/actions/artikulate-sentence.png
-/usr/share/icons/hicolor/16x16/actions/artikulate-word.png
 /usr/share/icons/hicolor/16x16/apps/artikulate.png
-/usr/share/icons/hicolor/32x32/actions/artikulate-course-editor.png
-/usr/share/icons/hicolor/32x32/actions/artikulate-course.png
-/usr/share/icons/hicolor/32x32/actions/artikulate-expression.png
-/usr/share/icons/hicolor/32x32/actions/artikulate-paragraph.png
-/usr/share/icons/hicolor/32x32/actions/artikulate-sentence.png
-/usr/share/icons/hicolor/32x32/actions/artikulate-word.png
 /usr/share/icons/hicolor/32x32/apps/artikulate.png
-/usr/share/icons/hicolor/48x48/actions/artikulate-course.png
-/usr/share/icons/hicolor/48x48/actions/artikulate-expression.png
-/usr/share/icons/hicolor/48x48/actions/artikulate-paragraph.png
-/usr/share/icons/hicolor/48x48/actions/artikulate-sentence.png
-/usr/share/icons/hicolor/48x48/actions/artikulate-word.png
 /usr/share/icons/hicolor/48x48/apps/artikulate.png
-/usr/share/icons/hicolor/64x64/actions/artikulate-course-editor.png
-/usr/share/icons/hicolor/64x64/actions/artikulate-expression.png
-/usr/share/icons/hicolor/64x64/actions/artikulate-paragraph.png
-/usr/share/icons/hicolor/64x64/actions/artikulate-sentence.png
-/usr/share/icons/hicolor/64x64/actions/artikulate-word.png
 /usr/share/icons/hicolor/64x64/apps/artikulate.png
-/usr/share/icons/hicolor/scalable/actions/artikulate-course-editor.svgz
-/usr/share/icons/hicolor/scalable/actions/artikulate-expression.svgz
-/usr/share/icons/hicolor/scalable/actions/artikulate-paragraph.svgz
-/usr/share/icons/hicolor/scalable/actions/artikulate-sentence.svgz
-/usr/share/icons/hicolor/scalable/actions/artikulate-word.svgz
-/usr/share/icons/hicolor/scalable/actions/language-artikulate.svg
 /usr/share/icons/hicolor/scalable/apps/artikulate.svg
 /usr/share/metainfo/org.kde.artikulate.appdata.xml
 /usr/share/xdg/artikulate.knsrc
@@ -247,10 +217,7 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/artikulate/133efad5329acf364135c569ac01ec084c3d4647
-/usr/share/package-licenses/artikulate/1bd373e4851a93027ba70064bd7dbdc6827147e1
-/usr/share/package-licenses/artikulate/7c0bb24324bf418d60ef11f29dfa60b77f6982a7
-/usr/share/package-licenses/artikulate/ff3ed70db4739b3c6747c7f624fe2bad70802987
+/usr/share/package-licenses/artikulate/cb036b5481429dea37c9c20c313d7aa1d911b181
 
 %files locales -f artikulate.lang
 %defattr(-,root,root,-)
