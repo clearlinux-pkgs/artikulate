@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : artikulate
-Version  : 23.04.0
-Release  : 52
-URL      : https://download.kde.org/stable/release-service/23.04.0/src/artikulate-23.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.04.0/src/artikulate-23.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.04.0/src/artikulate-23.04.0.tar.xz.sig
+Version  : 23.04.1
+Release  : 53
+URL      : https://download.kde.org/stable/release-service/23.04.1/src/artikulate-23.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.04.1/src/artikulate-23.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.04.1/src/artikulate-23.04.1.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause CC-BY-SA-4.0 CC0-1.0 GPL-2.0 GPL-3.0 LGPL-2.0 LGPL-2.1 LGPL-3.0 MIT
@@ -93,31 +93,48 @@ locales components for the artikulate package.
 
 
 %prep
-%setup -q -n artikulate-23.04.0
-cd %{_builddir}/artikulate-23.04.0
+%setup -q -n artikulate-23.04.1
+cd %{_builddir}/artikulate-23.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682023265
+export SOURCE_DATE_EPOCH=1684784711
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1682023265
+export SOURCE_DATE_EPOCH=1684784711
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/artikulate
 cp %{_builddir}/artikulate-%{version}/COPYING %{buildroot}/usr/share/package-licenses/artikulate/2a638514c87c4923c0570c55822620fad56f2a33 || :
@@ -139,16 +156,22 @@ cp %{_builddir}/artikulate-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt 
 cp %{_builddir}/artikulate-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/artikulate/cbca59e0e62dd8bfc0468847678552cadebea0a9 || :
 cp %{_builddir}/artikulate-%{version}/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/artikulate/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3 || :
 cp %{_builddir}/artikulate-%{version}/logo.png.license %{buildroot}/usr/share/package-licenses/artikulate/528d7843c59ad6acea9d2211aa8c2101de4bafc8 || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang artikulate
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/artikulate
+/V3/usr/bin/artikulate_editor
 /usr/bin/artikulate
 /usr/bin/artikulate_editor
 
@@ -220,6 +243,9 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libartikulatecore.so.0
+/V3/usr/lib64/libartikulatelearnerprofile.so.0
+/V3/usr/lib64/libartikulatesound.so.0
 /usr/lib64/libartikulatecore.so.0
 /usr/lib64/libartikulatelearnerprofile.so.0
 /usr/lib64/libartikulatesound.so.0
